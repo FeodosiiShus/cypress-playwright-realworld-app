@@ -11,6 +11,10 @@
   "bugs": {
     "url": "https://github.com/cypress-io/cypress-realworld-app/issues"
   },
+  "private": true,
+  "workspaces": [
+    "playwright"
+  ],
   "dependencies": {
     "@auth0/auth0-react": "2.2.4",
     "@babel/core": "^7.28.0",
@@ -191,7 +195,10 @@
     "build": "vite build",
     "codesandbox:start:api": "yarn tsnode:not-instrumented --files backend/app.ts",
     "codesandbox:start": "NODE_ENV=development TSC_COMPILE_ON_ERROR=true concurrently \"vite\" yarn:start:api:codesandbox",
-    "postinstall": "husky install && patch-package"
+    "postinstall": "husky install && patch-package",
+    "pw:test": "yarn workspace playwright-tests test",
+    "pw:test:ui": "yarn workspace playwright-tests test:ui",
+    "pw:install": "yarn workspace playwright-tests install:browsers"
   },
   "engines": {
     "node": "^20.0.0 || ^22.0.0"
