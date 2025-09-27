@@ -7,8 +7,6 @@ import jwksRsa from "jwks-rsa";
 
 // @ts-ignore
 import OktaJwtVerifier from "@okta/jwt-verifier";
-// @ts-ignore
-import awsConfig from "../src/aws-exports";
 
 dotenv.config();
 
@@ -78,21 +76,7 @@ export const verifyOktaToken = (req: Request, res: Response, next: NextFunction)
   }
 };
 
-// Amazon Cognito Validate the JWT Signature
-// https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html#amazon-cognito-user-pools-using-tokens-step-2
-const userPoolId = awsConfig.Auth.Cognito.userPoolId;
-const region = userPoolId.split("_")[0];
-const awsCognitoJwtConfig = {
-  secret: jwksRsa.expressJwtSecret({
-    jwksUri: `https://cognito-idp.${region}.amazonaws.com/${userPoolId}/.well-known/jwks.json`,
-  }),
-
-  issuer: `https://cognito-idp.${region}.amazonaws.com/${userPoolId}`,
-  algorithms: ["RS256"],
-};
-
 export const checkAuth0Jwt = jwt(auth0JwtConfig).unless({ path: ["/testData/*"] });
-export const checkCognitoJwt = jwt(awsCognitoJwtConfig).unless({ path: ["/testData/*"] });
 export const checkGoogleJwt = jwt(googleJwtConfig).unless({ path: ["/testData/*"] });
 
 export const ensureAuthenticated = (req: Request, res: Response, next: NextFunction) => {

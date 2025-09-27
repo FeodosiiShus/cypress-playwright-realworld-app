@@ -1,4 +1,3 @@
-import path from "path";
 import _ from "lodash";
 import axios from "axios";
 import dotenv from "dotenv";
@@ -9,14 +8,6 @@ import viteConfig from "./vite.cypress.config.ts";
 
 dotenv.config({ path: ".env.local" });
 dotenv.config();
-
-let awsConfig = {
-  default: undefined,
-};
-
-try {
-  awsConfig = require(path.join(__dirname, "./aws-exports-es5.js"));
-} catch (e) {}
 
 export default defineConfig({
   projectId: "7s5okt",
@@ -45,13 +36,6 @@ export default defineConfig({
     okta_domain: process.env.VITE_OKTA_DOMAIN,
     okta_client_id: process.env.VITE_OKTA_CLIENTID,
     okta_programmatic_login: process.env.OKTA_PROGRAMMATIC_LOGIN || false,
-
-    // Amazon Cognito
-    cognito_username: process.env.AWS_COGNITO_USERNAME,
-    cognito_password: process.env.AWS_COGNITO_PASSWORD,
-    cognito_domain: process.env.AWS_COGNITO_DOMAIN,
-    cognito_programmatic_login: false,
-    awsConfig: awsConfig.default,
 
     // Google
     googleRefreshToken: process.env.GOOGLE_REFRESH_TOKEN,
