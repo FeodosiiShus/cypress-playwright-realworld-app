@@ -6,6 +6,17 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["node", "@playwright/test"]
+    "types": [
+      "node",
+      "@playwright/test"
+    ],
+    "paths": {
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@asserts/*": [
+        "assertions/*"
+      ]
+    }
   }
 }
