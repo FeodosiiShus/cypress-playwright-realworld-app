@@ -16,6 +16,12 @@
       ],
       "@asserts/*": [
         "assertions/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@test-data/*": [
+        "test-data/*"
       ]
     }
   }

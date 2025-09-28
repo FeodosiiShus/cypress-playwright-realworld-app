@@ -1,5 +1,6 @@
 import type { Locator, Page } from "@playwright/test";
 import { AbstractPage } from "@pages/abstract-page";
+import type { ISignIn } from "@utils/sign-in/interfaces";
 
 export class SignInPage extends AbstractPage {
   readonly #heading: Locator;
@@ -41,9 +42,9 @@ export class SignInPage extends AbstractPage {
     await this.#password.fill(password);
   }
 
-  async fill(signInData: { username: string; password: string }) {
-    await this.fillUsername(signInData.username);
-    await this.fillPassword(signInData.password);
+  async fill(signIn: ISignIn) {
+    await this.fillUsername(signIn.username);
+    await this.fillPassword(signIn.password);
   }
 
   get submitButton() {
